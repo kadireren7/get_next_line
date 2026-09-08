@@ -1,13 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kaaltint@student.42istanbul.com.tr         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/09/08 22:33:32 by kaaltint          #+#    #+#             */
+/*   Updated: 2026/09/08 22:38:07 by kaaltint         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line_bonus.h"
 
 size_t	ft_strlen(const char *s)
 {
-    size_t i;
-    
-    i = 0;
-    while (s[i])
-        i++;
-    return (i);
+	size_t	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }
 
 char	*ft_strchr(const char *s, int c)
@@ -51,4 +63,24 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	}
 	new[i + j] = '\0';
 	return (new);
+}
+
+char	*init_stash(void)
+{
+	char	*stash;
+
+	stash = malloc(1);
+	if (!stash)
+		return (NULL);
+	stash[0] = '\0';
+	return (stash);
+}
+
+char	*append_buffer(char *stash, char *buffer)
+{
+	char	*new_stash;
+
+	new_stash = ft_strjoin(stash, buffer);
+	free(stash);
+	return (new_stash);
 }

@@ -1,24 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kaaltint@student.42istanbul.com.tr         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/09/08 22:33:35 by kaaltint          #+#    #+#             */
+/*   Updated: 2026/09/08 22:35:23 by kaaltint         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
-
-static char	*init_stash(void)
-{
-	char	*stash;
-
-	stash = malloc(1);
-	if (!stash)
-		return (NULL);
-	stash[0] = '\0';
-	return (stash);
-}
-
-static char	*append_buffer(char *stash, char *buffer)
-{
-	char	*new_stash;
-
-	new_stash = ft_strjoin(stash, buffer);
-	free(stash);
-	return (new_stash);
-}
 
 static char	*read_loop(int fd, char *stash, char *buffer)
 {
