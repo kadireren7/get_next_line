@@ -6,7 +6,7 @@
 /*   By: kaaltint@student.42istanbul.com.tr         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/08 22:33:34 by kaaltint          #+#    #+#             */
-/*   Updated: 2026/09/08 22:36:06 by kaaltint         ###   ########.fr       */
+/*   Updated: 2026/09/10 13:02:03 by kaaltint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	return (new);
 }
 
-char	*init_stash(void)
+char	*create_stash(void)
 {
 	char	*stash;
 
@@ -76,7 +76,7 @@ char	*init_stash(void)
 	return (stash);
 }
 
-char	*append_buffer(char *stash, char *buffer)
+char	*join_buffer(char *stash, char *buffer)
 {
 	char	*new_stash;
 

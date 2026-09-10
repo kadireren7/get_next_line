@@ -6,7 +6,7 @@
 /*   By: kaaltint@student.42istanbul.com.tr         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/08 22:33:30 by kaaltint          #+#    #+#             */
-/*   Updated: 2026/09/08 22:36:50 by kaaltint         ###   ########.fr       */
+/*   Updated: 2026/09/10 13:03:04 by kaaltint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*get_next_line(int fd);
 size_t	ft_strlen(const char *s);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strjoin(const char *s1, const char *s2);
-char	*init_stash(void);
-char	*append_buffer(char *stash, char *buffer);
+char	*create_stash(void);
+char	*join_buffer(char *stash, char *buffer);
 
 #endif

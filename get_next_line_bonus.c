@@ -6,13 +6,13 @@
 /*   By: kaaltint@student.42istanbul.com.tr         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/08 22:33:28 by kaaltint          #+#    #+#             */
-/*   Updated: 2026/09/08 22:36:41 by kaaltint         ###   ########.fr       */
+/*   Updated: 2026/09/10 13:02:46 by kaaltint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-static char	*read_loop(int fd, char *stash, char *buffer)
+static char	*read_until_line(int fd, char *stash, char *buffer)
 {
 	ssize_t	bytes_read;
 
@@ -27,19 +27,19 @@ static char	*read_loop(int fd, char *stash, char *buffer)
 		}
 		buffer[bytes_read] = '\0';
 		if (bytes_read > 0)
-			stash = append_buffer(stash, buffer);
+			stash = join_buffer(stash, buffer);
 		if (!stash)
 			return (NULL);
 	}
 	return (stash);
 }
 
-static char	*read_to_stash(int fd, char *stash)
+static char	*fill_stash(int fd, char *stash)
 {
 	char	*buffer;
 
 	if (!stash)
-		stash = init_stash();
+		stash = create_stash();
 	if (!stash)
 		return (NULL);
 	buffer = malloc(BUFFER_SIZE + 1);
@@ -48,12 +48,12 @@ static char	*read_to_stash(int fd, char *stash)
 		free(stash);
 		return (NULL);
 	}
-	stash = read_loop(fd, stash, buffer);
+	stash = read_until_line(fd, stash, buffer);
 	free(buffer);
 	return (stash);
 }
 
-static char	*extract_line(char *stash)
+static char	*build_line(char *stash)
 {
 	char	*line;
 	size_t	i;
@@ -79,7 +79,7 @@ static char	*extract_line(char *stash)
 	return (line);
 }
 
-static char	*trim_stash(char *stash)
+static char	*save_remainder(char *stash)
 {
 	char	*rest;
 	size_t	i;
@@ -115,16 +115,16 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || fd >= MAX_FD || BUFFER_SIZE <= 0)
 		return (NULL);
-	stash[fd] = read_to_stash(fd, stash[fd]);
+	stash[fd] = fill_stash(fd, stash[fd]);
 	if (!stash[fd])
 		return (NULL);
-	line = extract_line(stash[fd]);
+	line = build_line(stash[fd]);
 	if (!line)
 	{
 		free(stash[fd]);
 		stash[fd] = NULL;
 		return (NULL);
 	}
-	stash[fd] = trim_stash(stash[fd]);
+	stash[fd] = save_remainder(stash[fd]);
 	return (line);
 }
